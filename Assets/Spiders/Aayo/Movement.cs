@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    Camera camera;
     public SpiderController player;
-    void Start()
-    {
-        camera = Camera.main;
-    }
 
     // Update is called once per frame
     void Update()
@@ -20,7 +15,7 @@ public class Movement : MonoBehaviour
             RaycastHit hit;
             Vector3 mousePos = Input.mousePosition;
 
-            if (Physics.Raycast(camera.ScreenPointToRay(mousePos), out hit, Mathf.Infinity)) {
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(mousePos), out hit, Mathf.Infinity)) {
                 player.SetTarget(hit.point);
             }
         }
@@ -30,7 +25,8 @@ public class Movement : MonoBehaviour
     void drawDebug() {
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = 100f;
-        mousePos = camera.ScreenToWorldPoint(mousePos);
-        Debug.DrawRay(camera.transform.position, mousePos - camera.transform.position, Color.blue);
+        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+        Debug.DrawRay(Camera.main.transform.position, mousePos - Camera.main.transform.position, Color.blue);
     }
+
 }
